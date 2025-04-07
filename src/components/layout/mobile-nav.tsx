@@ -50,14 +50,18 @@ export function MobileNav() {
           <Search className="mr-2 h-4 w-4" />
           Search
         </Button>
-        <Button variant="outline" className="w-full justify-start">
-          <User className="mr-2 h-4 w-4" />
-          Account
-        </Button>
-        <Button variant="outline" className="w-full justify-start">
-          <ShoppingCart className="mr-2 h-4 w-4" />
-          Cart
-        </Button>
+        <Link href="/auth">
+          <Button variant="outline" className="w-full justify-start">
+            <User className="mr-2 h-4 w-4" />
+            Account
+          </Button>
+        </Link>
+        <Link href="/checkout">
+          <Button variant="outline" className="w-full justify-start">
+            <ShoppingCart className="mr-2 h-4 w-4" />
+            Cart
+          </Button>
+        </Link>
       </div>
     </div>
   );
