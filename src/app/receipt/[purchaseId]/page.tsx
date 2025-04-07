@@ -15,10 +15,10 @@ import { formatPrice } from "@/lib/utils";
 export default async function ReceiptPage({
   params,
 }: {
-  params: { purchaseId: string };
+  params: Promise<{ purchaseId: string }>;
 }) {
   // Fetch purchase details from the database
-  const purchaseId = params.purchaseId;
+  const purchaseId = (await params).purchaseId;
   const purchase = await prisma.purchase.findUnique({
     where: { id: purchaseId },
     include: {
