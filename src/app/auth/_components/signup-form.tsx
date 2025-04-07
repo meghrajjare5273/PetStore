@@ -125,9 +125,9 @@ export function SignUpForm() {
   };
 
   return (
-    <Card>
+    <Card className="border-0 shadow-none">
       <form onSubmit={handleSubmit}>
-        <CardContent className="space-y-4 pt-6">
+        <CardContent className="space-y-6 pt-0">
           {errors.terms && (
             <div className="text-destructive text-sm font-medium">
               {errors.terms}
@@ -135,13 +135,16 @@ export function SignUpForm() {
           )}
 
           <div className="space-y-2">
-            <Label htmlFor="name">Name</Label>
+            <Label htmlFor="name" className="text-base">
+              Name
+            </Label>
             <Input
               id="name"
               placeholder="Enter your name"
               value={formValues.name || ""}
               onChange={(e) => handleChange("name", e.target.value)}
               disabled={isLoading}
+              className="h-12"
             />
             {errors.name && (
               <p className="text-destructive text-sm">{errors.name}</p>
@@ -149,7 +152,9 @@ export function SignUpForm() {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="email">Email</Label>
+            <Label htmlFor="email" className="text-base">
+              Email
+            </Label>
             <Input
               id="email"
               type="email"
@@ -157,6 +162,7 @@ export function SignUpForm() {
               value={formValues.email || ""}
               onChange={(e) => handleChange("email", e.target.value)}
               disabled={isLoading}
+              className="h-12"
             />
             {errors.email && (
               <p className="text-destructive text-sm">{errors.email}</p>
@@ -164,7 +170,9 @@ export function SignUpForm() {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="password">Password</Label>
+            <Label htmlFor="password" className="text-base">
+              Password
+            </Label>
             <div className="relative">
               <Input
                 id="password"
@@ -173,12 +181,13 @@ export function SignUpForm() {
                 value={formValues.password || ""}
                 onChange={(e) => handleChange("password", e.target.value)}
                 disabled={isLoading}
+                className="h-12 pr-10"
               />
               <Button
                 type="button"
                 variant="ghost"
                 size="icon"
-                className="absolute right-2 top-1/2 -translate-y-1/2 h-7 w-7"
+                className="absolute right-2 top-1/2 -translate-y-1/2 h-8 w-8"
                 onClick={() => setShowPassword(!showPassword)}
               >
                 {showPassword ? (
@@ -217,8 +226,12 @@ export function SignUpForm() {
             <p className="text-destructive text-sm">{errors.terms}</p>
           )}
         </CardContent>
-        <CardFooter>
-          <Button type="submit" className="w-full" disabled={isLoading}>
+        <CardFooter className="px-0 pt-2">
+          <Button
+            type="submit"
+            className="w-full h-12 text-base bg-primary"
+            disabled={isLoading}
+          >
             {isLoading ? "Creating account..." : "Sign Up"}
           </Button>
         </CardFooter>

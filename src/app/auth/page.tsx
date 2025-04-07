@@ -19,10 +19,10 @@ export default function AuthPage() {
           <TabsTrigger value="signin">Sign In</TabsTrigger>
           <TabsTrigger value="signup">Sign Up</TabsTrigger>
         </TabsList>
-        <TabsContent value="signin">
+        <TabsContent value="signin" className="mt-4">
           <SignInForm />
         </TabsContent>
-        <TabsContent value="signup">
+        <TabsContent value="signup" className="mt-4">
           <SignUpForm />
         </TabsContent>
       </Tabs>

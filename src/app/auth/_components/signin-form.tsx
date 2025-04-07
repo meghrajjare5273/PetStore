@@ -109,9 +109,9 @@ export function SignInForm() {
   };
 
   return (
-    <Card>
+    <Card className="border-0 shadow-none">
       <form onSubmit={handleSubmit}>
-        <CardContent className="space-y-4 pt-6">
+        <CardContent className="space-y-6 pt-0">
           {errors.form && (
             <div className="text-destructive text-sm font-medium">
               {errors.form}
@@ -119,7 +119,9 @@ export function SignInForm() {
           )}
 
           <div className="space-y-2">
-            <Label htmlFor="email">Email</Label>
+            <Label htmlFor="email" className="text-base">
+              Email
+            </Label>
             <Input
               id="email"
               type="email"
@@ -127,6 +129,7 @@ export function SignInForm() {
               value={formValues.email}
               onChange={(e) => handleChange("email", e.target.value)}
               disabled={isLoading}
+              className="h-12"
             />
             {errors.email && (
               <p className="text-destructive text-sm">{errors.email}</p>
@@ -135,7 +138,9 @@ export function SignInForm() {
 
           <div className="space-y-2">
             <div className="flex items-center justify-between">
-              <Label htmlFor="password">Password</Label>
+              <Label htmlFor="password" className="text-base">
+                Password
+              </Label>
               <Button
                 variant="link"
                 className="h-auto p-0 text-sm"
@@ -152,12 +157,13 @@ export function SignInForm() {
                 value={formValues.password}
                 onChange={(e) => handleChange("password", e.target.value)}
                 disabled={isLoading}
+                className="h-12 pr-10"
               />
               <Button
                 type="button"
                 variant="ghost"
                 size="icon"
-                className="absolute right-2 top-1/2 -translate-y-1/2 h-7 w-7"
+                className="absolute right-2 top-1/2 -translate-y-1/2 h-8 w-8"
                 onClick={() => setShowPassword(!showPassword)}
               >
                 {showPassword ? (
@@ -190,8 +196,12 @@ export function SignInForm() {
             </label>
           </div>
         </CardContent>
-        <CardFooter>
-          <Button type="submit" className="w-full" disabled={isLoading}>
+        <CardFooter className="px-0 pt-2">
+          <Button
+            type="submit"
+            className="w-full h-12 text-base bg-primary"
+            disabled={isLoading}
+          >
             {isLoading ? "Signing in..." : "Sign In"}
           </Button>
         </CardFooter>
