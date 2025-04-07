@@ -5,16 +5,16 @@ import { ProductList } from "@/components/ProductList";
 import { Separator } from "@/components/ui/separator";
 
 interface ProductsPageProps {
-  searchParams: {
+  searchParams: Promise<{
     category?: string;
     pet?: string;
-  };
+  }>;
 }
 
 export default async function ProductsPage({
   searchParams,
 }: ProductsPageProps) {
-  const { category, pet } = searchParams;
+  const { category, pet } = await searchParams;
 
   // Build filter based on search params
   const filter: any = { stockQuantity: { gt: 0 } };

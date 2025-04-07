@@ -5,14 +5,14 @@ import { PetList } from "@/components/PetList";
 import { Separator } from "@/components/ui/separator";
 
 interface PetsPageProps {
-  searchParams: {
+  searchParams: Promise<{
     type?: string;
     breed?: string;
-  };
+  }>;
 }
 
 export default async function PetsPage({ searchParams }: PetsPageProps) {
-  const { type, breed } = searchParams;
+  const { type, breed } = await searchParams;
 
   // Build filter based on search params
   const filter: any = { purchaseId: null };
