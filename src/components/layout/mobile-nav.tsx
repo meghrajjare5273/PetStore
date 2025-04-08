@@ -46,10 +46,12 @@ export function MobileNav() {
       </nav>
       <Separator />
       <div className="flex flex-col gap-4">
-        <Button variant="outline" className="w-full justify-start">
-          <Search className="mr-2 h-4 w-4" />
-          Search
-        </Button>
+        <Link href="/store/search">
+          <Button variant="outline" className="w-full justify-start">
+            <Search className="mr-2 h-4 w-4" />
+            Search
+          </Button>
+        </Link>
         <Link href="/auth">
           <Button variant="outline" className="w-full justify-start">
             <User className="mr-2 h-4 w-4" />

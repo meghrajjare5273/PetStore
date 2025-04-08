@@ -6,11 +6,25 @@ import { useCart } from "@/context/CartContext";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { MobileNav } from "@/components/layout/mobile-nav";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { Input } from "../ui/input";
 
 export function Navbar() {
   const { pets, products } = useCart();
   const totalItems =
     pets.length + products.reduce((sum, item) => sum + item.quantity, 0);
+  const [searchQuery, setSearchQuery] = useState("");
+  const router = useRouter();
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handleSearch = (e: any) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      router.push(`/store/search?q=${encodeURIComponent(searchQuery)}`);
+      setSearchQuery(""); // Optional: clear input after submission
+    }
+  };
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -55,9 +69,23 @@ export function Navbar() {
 
         <div className="flex items-center gap-4">
           <div className="hidden md:flex items-center gap-4">
-            <Button variant="ghost" size="icon">
-              <Search className="h-5 w-5" />
-            </Button>
+            <form onSubmit={handleSearch} className="relative">
+              <Input
+                type="search"
+                placeholder="Search pets and products"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="pr-8 w-48"
+              />
+              <Button
+                type="submit"
+                variant="ghost"
+                size="icon"
+                className="absolute right-0 top-0"
+              >
+                <Search className="h-4 w-4" />
+              </Button>
+            </form>
             <Link href="/auth">
               <Button variant="ghost" size="icon">
                 <User className="h-5 w-5" />

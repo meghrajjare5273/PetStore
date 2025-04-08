@@ -1,26 +1,39 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { prisma } from "@/lib/prisma";
+import Link from "next/link";
 import CartSummary from "@/components/CartSummary";
 import { PetList } from "@/components/PetList";
 import { Separator } from "@/components/ui/separator";
+import { Prisma } from "@prisma/client";
+import { cn } from "@/lib/utils";
 
 interface PetsPageProps {
   searchParams: Promise<{
     type?: string;
     breed?: string;
+    sort?: string;
   }>;
 }
 
 export default async function PetsPage({ searchParams }: PetsPageProps) {
-  const { type, breed } = await searchParams;
+  const { type, breed, sort = "price-asc" } = await searchParams;
+
+  // Handle sorting
+  let orderBy;
+  if (sort === "price-asc") orderBy = { price: Prisma.SortOrder.asc };
+  else if (sort === "price-desc") orderBy = { price: Prisma.SortOrder.desc };
+  else if (sort === "age-asc") orderBy = { age: Prisma.SortOrder.asc };
+  else if (sort === "age-desc") orderBy = { age: Prisma.SortOrder.desc };
+  else orderBy = { price: Prisma.SortOrder.asc }; // Default
 
   // Build filter based on search params
-  const filter: any = { purchaseId: null };
+  const filter: any = { purchaseId: null }; // Available pets only
   if (type) filter.type = type;
   if (breed) filter.breed = breed;
 
   const pets = await prisma.pet.findMany({
     where: filter,
+    orderBy,
   });
 
   // Get unique types and breeds for filters
@@ -36,11 +49,72 @@ export default async function PetsPage({ searchParams }: PetsPageProps) {
     <div className="container py-8 px-4 md:px-6">
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8">
         <div className="col-span-1 md:col-span-2 lg:col-span-3">
-          <div className="flex flex-col md:flex-row md:items-center justify-between mb-6">
-            <h1 className="text-3xl font-bold mb-2 md:mb-0">Pets</h1>
-            <p className="text-muted-foreground">
-              {pets.length} {pets.length === 1 ? "pet" : "pets"} available
-            </p>
+          <div className="flex flex-col space-y-4 md:space-y-0 md:flex-row md:items-center justify-between mb-6">
+            <div>
+              <h1 className="text-3xl font-bold mb-2 md:mb-0">Pets</h1>
+              <p className="text-muted-foreground">
+                {pets.length} {pets.length === 1 ? "pet" : "pets"} available
+              </p>
+            </div>
+
+            {/* Sorting options */}
+            <div className="flex flex-col md:flex-row md:items-center gap-2">
+              <span className="text-sm font-medium">Sort by:</span>
+              <div className="flex gap-2 flex-wrap">
+                <Link
+                  href={`/store/pets?${new URLSearchParams({
+                    ...(type ? { type } : {}),
+                    ...(breed ? { breed } : {}),
+                    sort: "price-asc",
+                  }).toString()}`}
+                  className={cn(
+                    "text-sm hover:text-primary",
+                    sort === "price-asc" && "text-primary font-medium"
+                  )}
+                >
+                  Price: Low to High
+                </Link>
+                <Link
+                  href={`/store/pets?${new URLSearchParams({
+                    ...(type ? { type } : {}),
+                    ...(breed ? { breed } : {}),
+                    sort: "price-desc",
+                  }).toString()}`}
+                  className={cn(
+                    "text-sm hover:text-primary",
+                    sort === "price-desc" && "text-primary font-medium"
+                  )}
+                >
+                  Price: High to Low
+                </Link>
+                <Link
+                  href={`/store/pets?${new URLSearchParams({
+                    ...(type ? { type } : {}),
+                    ...(breed ? { breed } : {}),
+                    sort: "age-asc",
+                  }).toString()}`}
+                  className={cn(
+                    "text-sm hover:text-primary",
+                    sort === "age-asc" && "text-primary font-medium"
+                  )}
+                >
+                  Age: Youngest First
+                </Link>
+                <Link
+                  href={`/store/pets?${new URLSearchParams({
+                    ...(type ? { type } : {}),
+                    ...(breed ? { breed } : {}),
+                    sort: "age-desc",
+                  }).toString()}`}
+                  className={cn(
+                    "text-sm hover:text-primary",
+                    sort === "age-desc" && "text-primary font-medium"
+                  )}
+                >
+                  Age: Oldest First
+                </Link>
+              </div>
+            </div>
           </div>
 
           {/* Active filters */}
@@ -87,16 +161,19 @@ export default async function PetsPage({ searchParams }: PetsPageProps) {
                   <div className="space-y-2">
                     {types.map((petType) => (
                       <div key={petType} className="flex items-center">
-                        <a
-                          href={`/store/pets?type=${petType}${
-                            breed ? `&breed=${breed}` : ""
-                          }`}
-                          className={`text-sm hover:text-primary ${
-                            type === petType ? "text-primary font-medium" : ""
-                          }`}
+                        <Link
+                          href={`/store/pets?${new URLSearchParams({
+                            type: petType,
+                            ...(breed ? { breed } : {}),
+                            ...(sort ? { sort } : {}),
+                          }).toString()}`}
+                          className={cn(
+                            "text-sm hover:text-primary",
+                            type === petType && "text-primary font-medium"
+                          )}
                         >
                           {petType}
-                        </a>
+                        </Link>
                       </div>
                     ))}
                   </div>
@@ -109,16 +186,19 @@ export default async function PetsPage({ searchParams }: PetsPageProps) {
                   <div className="space-y-2">
                     {breeds.map((petBreed) => (
                       <div key={petBreed} className="flex items-center">
-                        <a
-                          href={`/store/pets?breed=${petBreed}${
-                            type ? `&type=${type}` : ""
-                          }`}
-                          className={`text-sm hover:text-primary ${
-                            breed === petBreed ? "text-primary font-medium" : ""
-                          }`}
+                        <Link
+                          href={`/store/pets?${new URLSearchParams({
+                            ...(type ? { type } : {}),
+                            breed: petBreed,
+                            ...(sort ? { sort } : {}),
+                          }).toString()}`}
+                          className={cn(
+                            "text-sm hover:text-primary",
+                            breed === petBreed && "text-primary font-medium"
+                          )}
                         >
                           {petBreed}
-                        </a>
+                        </Link>
                       </div>
                     ))}
                   </div>
