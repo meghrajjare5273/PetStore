@@ -32,7 +32,7 @@ export default function Home() {
             </div>
             <div className="relative h-[400px] w-full flex justify-center">
               <Image
-                src="/images/dog.jpg"
+                src="/petopia.png"
                 alt="Happy dog"
                 fill
                 className="object-contain"
@@ -79,10 +79,10 @@ export default function Home() {
               <CardContent className="p-6 flex flex-col items-center text-center h-full">
                 <div className="w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center mb-4">
                   <Image
-                    src="/images/dog-food.jpg"
+                    src="/pet food.png"
                     alt="Pet Food"
-                    width={60}
-                    height={60}
+                    width={100}
+                    height={100}
                     className="object-contain"
                   />
                 </div>
@@ -101,10 +101,10 @@ export default function Home() {
               <CardContent className="p-6 flex flex-col items-center text-center h-full">
                 <div className="w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center mb-4">
                   <Image
-                    src="/images/cat-toy.jpg"
+                    src="/pet toys.jpeg"
                     alt="Pet Toys"
-                    width={60}
-                    height={60}
+                    width={100}
+                    height={100}
                     className="object-contain"
                   />
                 </div>
@@ -125,10 +125,10 @@ export default function Home() {
               <CardContent className="p-6 flex flex-col items-center text-center h-full">
                 <div className="w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center mb-4">
                   <Image
-                    src="/placeholder.svg?height=60&width=60"
+                    src="/pet care.png"
                     alt="Pet Care"
-                    width={60}
-                    height={60}
+                    width={100}
+                    height={100}
                     className="object-contain"
                   />
                 </div>
@@ -149,10 +149,10 @@ export default function Home() {
               <CardContent className="p-6 flex flex-col items-center text-center h-full">
                 <div className="w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center mb-4">
                   <Image
-                    src="/placeholder.svg?height=60&width=60"
+                    src="/pet beds.png"
                     alt="Pet Beds"
-                    width={60}
-                    height={60}
+                    width={100}
+                    height={100}
                     className="object-contain"
                   />
                 </div>
@@ -180,7 +180,7 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div className="flex justify-center">
               <Image
-                src="/placeholder.svg?height=400&width=400"
+                src="/petopia.png"
                 alt="Happy pets"
                 width={400}
                 height={400}

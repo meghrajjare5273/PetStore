@@ -26,9 +26,10 @@ export default function AboutPage() {
 
           <div className="my-8 relative h-[300px] w-full rounded-lg overflow-hidden">
             <Image
-              src="/placeholder.svg?height=600&width=1200"
+              src="/petopia.png"
               alt="Petopia store"
-              fill
+              width={250} 
+              height={250}
               className="object-cover"
             />
           </div>
@@ -64,9 +65,10 @@ export default function AboutPage() {
             <div className="text-center">
               <div className="relative h-[150px] w-[150px] mx-auto rounded-full overflow-hidden mb-4">
                 <Image
-                  src="/placeholder.svg?height=300&width=300"
+                  src="/veterinary.jpeg"
                   alt="Team member"
-                  fill
+                  width={250} 
+                  height={250}
                   className="object-cover"
                 />
               </div>
@@ -77,9 +79,10 @@ export default function AboutPage() {
             <div className="text-center">
               <div className="relative h-[150px] w-[150px] mx-auto rounded-full overflow-hidden mb-4">
                 <Image
-                  src="/placeholder.svg?height=300&width=300"
+                  src="/nutritionist.jpeg"
                   alt="Team member"
-                  fill
+                  width={250} 
+                  height={250}
                   className="object-cover"
                 />
               </div>
@@ -90,9 +93,10 @@ export default function AboutPage() {
             <div className="text-center">
               <div className="relative h-[150px] w-[150px] mx-auto rounded-full overflow-hidden mb-4">
                 <Image
-                  src="/placeholder.svg?height=300&width=300"
+                  src="/animal_doc.jpeg"
                   alt="Team member"
-                  fill
+                  width={250} 
+                  height={250}
                   className="object-cover"
                 />
               </div>
