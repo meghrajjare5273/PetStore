@@ -6,7 +6,7 @@
 
 ## ✨ Welcome to Pet Paradise
 
-Step into a world where pet lovers find their perfect companions and devoted pet parents discover everything their furry, feathered, or scaled friends could ever desire. Pet Store Alpha isn't just another pet shop—it's a vibrant community hub where animal enthusiasts converge to celebrate the magical bond between humans and their beloved animal companions.
+Step into a world where pet lovers find their perfect companions and devoted pet parents discover everything their furry, feathered, or scaled friends could ever desire. Petopia isn't just another pet shop—it's a vibrant community hub where animal enthusiasts converge to celebrate the magical bond between humans and their beloved animal companions.
 
 ## 🚀 Features
 
